@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Building2, Mail, Lock, User, Phone } from 'lucide-react'
 import { Input, Button } from '@/components/ui'
 
-export default function TenantInvitePage() {
+function TenantInviteContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const code = searchParams.get('code') || ''
@@ -159,5 +159,13 @@ export default function TenantInvitePage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function TenantInvitePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p>Loading...</p></div>}>
+      <TenantInviteContent />
+    </Suspense>
   )
 }
