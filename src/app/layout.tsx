@@ -5,6 +5,10 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 export const metadata: Metadata = {
   title: 'LandlordOS — Smart Property Management',
   description: 'AI-powered rental management for Indian property owners. Manage tenants, track rent, automate agreements.',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/icon.svg',
+  },
 }
 
 export default function RootLayout({
