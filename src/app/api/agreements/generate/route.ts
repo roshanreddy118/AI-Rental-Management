@@ -29,8 +29,9 @@ export async function POST(req: NextRequest) {
         .single()
       
       if (tenant) {
-        tenantName = tenant.user?.full_name || 'Tenant'
-        const p = tenant.property
+        const user = tenant.user as any
+        tenantName = user?.full_name || 'Tenant'
+        const p = tenant.property as any
         if (p) propertyAddress = `${p.name}, ${p.address}, ${p.city}, ${p.state} - ${p.pincode}`
       }
     }
