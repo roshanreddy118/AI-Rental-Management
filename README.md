@@ -21,7 +21,7 @@ A modern property management platform built for Indian landlords with 2-50 prope
 - **Database**: Supabase (PostgreSQL)
 - **Authentication**: Custom JWT + OTP via email
 - **Email**: Resend
-- **AI**: External AI endpoint for chat/agreement generation
+- **AI**: External AI endpoint for chat/agreement generation 
 - **Deployment**: Vercel
 
 ## Getting Started
