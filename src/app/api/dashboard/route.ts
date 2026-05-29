@@ -54,12 +54,13 @@ export async function GET(req: NextRequest) {
 
     const { data: paidThisMonth } = await supabase
       .from('rent_payments')
-      .select('id')
+      .select('id, amount')
       .eq('owner_id', payload.userId)
       .eq('status', 'paid')
       .gte('paid_date', startOfMonth.toISOString().split('T')[0])
 
     const rentCollected = paidThisMonth?.length || 0
+    const rentCollectedAmount = (paidThisMonth || []).reduce((sum, p) => sum + Number(p.amount), 0)
     const rentPending = totalTenants - rentCollected
 
     // Get pending maintenance
@@ -88,8 +89,8 @@ export async function GET(req: NextRequest) {
 
     const utilityPendingAmount = (utilityPending || []).reduce((sum, b) => sum + Number(b.amount), 0)
 
-    // Total income = monthly rent + utility collections
-    const totalCollected = monthlyIncome + utilityCollected
+    // Total income = actual rent collected + utility collections
+    const totalCollected = rentCollectedAmount + utilityCollected
 
     return NextResponse.json({
       stats: {
